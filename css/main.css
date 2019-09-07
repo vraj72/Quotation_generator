@@ -559,3 +559,87 @@ iframe {
     float: right;
     padding-right: 100px;
 }
+
+
+
+
+/*homepage css pasted here*/
+.wrapper {
+  width: 800px;
+  margin: 0 auto;
+}
+
+/* Sticky Header Style */
+/* ---------------------------------------- */
+
+
+.flip3D{
+ width:240px;
+ height:200px;
+ float: right; 
+ margin-left: 1%;
+ margin-right: 15%;
+  }
+
+.flip3D  .front{
+  position:absolute;
+  transform: perspective( 600px ) rotateY( 0deg );
+  background:lightblue; width:240px; height:200px; border-radius: 7px;
+  backface-visibility: hidden;
+  text-align:center;  
+  transition: transform .5s linear 0s;
+}
+.flip3D .back{
+  position:absolute;
+  transform: perspective( 600px ) rotateY( 180deg );
+  background: black;
+  color: white;
+  text-decoration-color: white;
+  line-height: 22px;
+  padding-left: 1%;
+  padding-right: 1%;
+  display: flex;
+  justify-content: center;align-items: center;
+  width:240px; 
+  height:200px;
+  border-radius: 7px;
+  backface-visibility: hidden;
+  transition: transform .5s linear 0s;
+}
+.flip3D:hover .front{
+  transform: perspective( 600px ) rotateY( -180deg );
+}
+.flip3D:hover  .back{
+  transform: perspective( 600px ) rotateY( 0deg );
+}
+
+.wrapper{
+
+  animation: left_to_right 5s ease;
+  /*padding-left: 250px;*/
+  /*text-align: left;*/
+}
+
+
+
+.name{
+  animation:  right_to_left 5s ease;
+padding-left: 250px;
+  /*text-align: left;*/
+}
+@keyframes  right_to_left{
+  from {
+    margin-left: 100%;
+  }
+  to {
+    margin-left: 0;
+  }
+}
+@keyframes left_to_right {
+  from {
+    margin-left: -100%;
+  }
+  to {
+    margin-left: 360px;
+  }
+}
