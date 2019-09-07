@@ -227,7 +227,7 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+  padding: 30px 10px 33px 70px;
 }
 
 
@@ -277,6 +277,20 @@ iframe {
 
   display: block;
   width: 100%;
+  background: #e6e6e6;
+  height: 50px;
+  border-radius: 25px;
+  padding: 0 30px 0 68px;
+}
+
+#inputTitle {
+  font-family: Poppins-Medium;
+  
+  line-height: 1.5;
+  color: #666666;
+  font-size: 30px;
+  display: block;
+  width: 60%;
   background: #e6e6e6;
   height: 50px;
   border-radius: 25px;
