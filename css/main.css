@@ -186,7 +186,7 @@ iframe {
   flex-wrap: wrap;
   /*justify-content: center;*/
   align-items: left;
-  padding: 15px;*/
+  padding: 15px;
   /*background-image: url('../images/hpback.jpg'); */
   /*use this to set image*/
 
@@ -225,9 +225,28 @@ iframe {
   display: -moz-box;
   display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  
   justify-content: space-between;
   padding: 30px 10px 33px 70px;
+}
+.container-q2 {
+  width: 100%;  
+  min-height: 100vh;
+  padding: 15px;
+ 
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+.wrap-q2 {
+  width: 70%;
+  height: auto;
+  background: #fff;
+  border-radius: 10px;
+
+  padding: 30px 50px 100px  70px;
 }
 
 
@@ -295,6 +314,31 @@ iframe {
   height: 50px;
   border-radius: 25px;
   padding: 0 30px 0 68px;
+}
+
+#inputTitle2 {
+  font-family: Poppins-Medium;
+  
+  line-height: 1.5;
+  color: #666666;
+  font-size: 30px;
+  display: block;
+  background: #e6e6e6;
+  height: 50px;
+  padding: 0 30px 10px 68px;
+}
+
+#inputTitlef {
+  font-family: Poppins-Medium;
+  
+  line-height: 1.5;
+  color: #666666;
+  font-size: 25px;
+  display: block;
+  background: #e6e6e6;
+  height: 40px;
+  width:400px;
+  padding: 0 0px 2px 10px;
 }
 
 

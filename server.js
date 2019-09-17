@@ -1,4 +1,5 @@
 var app = require('./route/app');
+
 app.get('/',(req,res)=>{
 	return res.send("quotation generator");
 })

@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="css/nav_css.css">
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script  src="js_files/sticky_nav.js"></script>
+	<script  src="js_files/sticky_nav.js"></script>
 	
 </head>
 
@@ -76,6 +76,7 @@
 			</div>
 		</div>
 	</div>
+	
 	<div>
 		
 	</div>
@@ -102,13 +103,21 @@
 
 		xhr.onload = function() {
     if (xhr.status === 200) {
-      swal("Successfully Login", "Create New Quotation with site_name", "success");
+
+    	swal(
+		    "Successfully Login",
+		    "Create New Quotation with site_name",
+		    "success"
+		).then(function() {
+		    window.location = "Homepage.html";
+		});
+      // swal("Successfully Login", "Create New Quotation with site_name", "success");
+      // location.replace("Homepage.html");
     }
     else{
-    	// alert("INVALID USERNAME/PASSWORD");
-    	// alert("INVALID USERNAME/PASSWORD");
-
+    	
     	swal("Invalid Username/Password", "Enter correct Creadentials", "error");
+
     }
   }
 
@@ -117,7 +126,7 @@
 			'password': pass
 		}
 		console.log(xhr, a);
-		xhr.open('POST', 'http://192.168.43.110:8081/login', true);
+		xhr.open('POST', 'http://192.168.43.110:8082/login', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.send(JSON.stringify(a));
 		console.log("send");

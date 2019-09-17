@@ -3,15 +3,22 @@ var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 const assert = require('assert');
+var collection;
 
 
 MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, function(err, client) {
 	assert.equal(null, err);
   	console.log("Connected successfully to server");
   	const db = client.db("quotation");
-  	const collection =db.collection('account');
+  	collection =db.collection('account');
 
-  	router.post('/login',(req,res)=>{
+  	
+  client.close();
+  console.log("Mongo Client Closed");
+});
+
+
+router.post('/login',(req,res)=>{
 
 				console.log("login called ");
 				var usrn= req.body.username;
@@ -19,7 +26,7 @@ MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, fun
     			console.log("id "+usrn+"  password "+password);
 
 
-				collection.find({'usrn' : usrn}).toArray(function(err,docs) {
+				collection.find({'id' : usrn}).toArray(function(err,docs) {
 					//console.log("inside "+docs.length);
 					if(docs.length == 0){
 						console.log("error in logging");
@@ -38,11 +45,6 @@ MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, fun
 					}
 				});
 			});
-	
-
-  client.close();
-  console.log("Mongo Client Closed");
-});
 
 module.exports= router;
 	
