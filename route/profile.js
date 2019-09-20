@@ -26,7 +26,7 @@ router.post('/profile',(req,res)=>{
     			console.log("id "+usrn);
 
 
-				collection.find({'id' : usrn}, { projection: { _id: 0, id: 1, pass: 1 , anynewfeild_will_come_here : 1} }).toArray(function(err,docs) {
+				collection.find({'id' : usrn}, { projection: { _id: 0 , which_fields_u_dont_want_make_theme :0} }).toArray(function(err,docs) {
 					//console.log("inside "+docs.length);
 					if(docs.length == 0){
 						console.log("Profile Not found");
