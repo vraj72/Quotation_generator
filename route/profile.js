@@ -8,7 +8,7 @@ var collection;
 
 MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, function(err, client) {
 	assert.equal(null, err);
-  	console.log("Connected successfully to server *login");
+  	console.log("Connected successfully to server *profile");
   	const db = client.db("quotation");
   	collection =db.collection('account');
 
@@ -18,30 +18,27 @@ MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, fun
 });
 
 
-router.post('/login',(req,res)=>{
+router.post('/profile',(req,res)=>{
 
-				console.log("login called ");
+				console.log("profile called ");
 				var usrn= req.body.username;
-    			var password = req.body.password;
-    			console.log("id "+usrn+"  password "+password);
+    			// var password = req.body.password;
+    			console.log("id "+usrn);
 
 
-				collection.find({'id' : usrn}).toArray(function(err,docs) {
+				collection.find({'id' : usrn}, { projection: { _id: 0, id: 1, pass: 1 , anynewfeild_will_come_here : 1} }).toArray(function(err,docs) {
 					//console.log("inside "+docs.length);
 					if(docs.length == 0){
-						console.log("error in logging");
+						console.log("Profile Not found");
 						res.sendStatus(404);
 					}
 					
 					else{
 						assert.equal(err,null);
-						//console.log("password "+docs[0].pass);
-						if(typeof docs[0].pass !== 'undefined' && docs[0].pass==password){
-						 		res.sendStatus(200); 
-						 		// res.send("Successfully Login");
-						 	} 
-						else  res.sendStatus(404);
-						// res.send("Invalid Username or Password");
+						console.log("password "+docs[0].pass);
+					
+								console.log(docs[0]);
+								res.send(docs[0]);
 					}
 				});
 			});

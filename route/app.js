@@ -12,8 +12,9 @@ app.use(function(req, res, next) {
 });
 
 var login = require('./login');
-
+var profile=require('./profile');
  
 app.use('',login);  //login file from post_login
+app.use('',profile);
 
 module.exports=app;

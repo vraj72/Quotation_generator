@@ -111,8 +111,6 @@
 		).then(function() {
 		    window.location = "Homepage.html";
 		});
-      // swal("Successfully Login", "Create New Quotation with site_name", "success");
-      // location.replace("Homepage.html");
     }
     else{
     	
@@ -126,14 +124,12 @@
 			'password': pass
 		}
 		console.log(xhr, a);
-		xhr.open('POST', 'http://192.168.43.110:8082/login', true);
+		xhr.open('POST', 'http://localhost:8081/login', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
 		xhr.send(JSON.stringify(a));
 		console.log("send");
 		var res = (JSON.stringify(xhr.responseText));
-		console.log(res);
-		// var res= xhr.getAllResponseHeaders();
-		//alert(res);
+		console.log("responseText "+res);
 		console.log(xhr);
 
 
