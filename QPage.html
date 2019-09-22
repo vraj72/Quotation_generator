@@ -10,7 +10,12 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/nav_css.css">
 	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script  src="js_files/sticky_nav.js"></script>
+	<script  src="js_files/sticky_nav.js"></script>
+	<script type="text/javascript" src="js_files/Main_js.js"></script>
+	<script type="text/javascript">
+		var username = getCookie("username");
+		console.log(username);
+	</script>
 </head>
 
 <header class="nav_header">
@@ -20,9 +25,8 @@
 	<a class="nav_a" href="Homepage.html" >Home</a>
 	<a class="nav_a_active" href="QPage.html">QuotationGenerator</a>
 	<a class="nav_a" href="">Samples</a>
-<span class="nav_span">
-	<a class="nav_a" href="login_page.html">LogIn</a>
-	<a class="nav_a" href="">Register</a>
+<span class="nav_span" id="span_login">
+	<a class="nav_a" href="login_page.html" id="login_a"></a>
 </span>
 </nav>
 </header>
@@ -189,6 +193,21 @@
 		
 	</body>
 	<script type="text/javascript">
+
+		if (username == "") {
+			document.getElementById('login_a').innerHTML ="Log IN";
+			var span_login = document.getElementById('span_login');
+			var reg_span='<a class="nav_a" href="">Register</a>';
+			span_login.innerHTML += reg_span;
+
+	  } 
+	  else {
+	  	document.getElementById('login_a').innerHTML ="Log OUT";
+	  	var span_login = document.getElementById('span_login');
+		var reg_span='<a class="nav_a" href="">Profile</a>';
+		span_login.innerHTML += reg_span;
+
+	  }
 		
 		var div_holding_feilds = document.getElementById('div_holding_feilds');
 		var i=1;
