@@ -233,6 +233,8 @@ iframe {
   width: 100%;  
   min-height: 100vh;
   padding: 15px;
+  justify-content: center;
+
  
   background: #9053c7;
   background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
@@ -241,7 +243,7 @@ iframe {
   background: linear-gradient(-135deg, #c850c0, #4158d0);
 }
 .wrap-q2 {
-  width: 70%;
+  width: 80%;
   height: auto;
   background: #fff;
   border-radius: 10px;
