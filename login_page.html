@@ -9,9 +9,12 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link rel="stylesheet" type="text/css" href="css/nav_css.css">
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+	<script src="node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+	<!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+	<script  src="js_files/jquery.js"></script>
 	<script  src="js_files/sticky_nav.js"></script>
+	<script  src="js_files/Login_ex.js"></script>
 
 	<script type="text/javascript">
 		document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
@@ -34,7 +37,7 @@
 </nav>
 </header>
 
-<body>
+<body onload="noBack();">
 	<div style="padding-top: 150px;">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -85,64 +88,11 @@
 		
 	</div>
 </body>
-</html>
 <script type="text/javascript">
-
-	function validate() {
-		var usrn = document.getElementById("username").value;
-		var pass = document.getElementById("password").value;
-
-		if(usrn.length == 0)
-			{
-					swal("Enter Username");
-					return false;
-			}
-			else if(pass.length == 0)
-				{
-					swal("Enter Password");
-					return false;
-			}
-
-		var xhr = new XMLHttpRequest();
-
-		xhr.onload = function() {
-    if (xhr.status === 200) {
-
-    	var d = new Date();
-		d.setTime(d.getTime() + (1*24*60*60*1000));
-		var expires = "expires="+ d.toUTCString();
-		document.cookie = "username=" + usrn + ";" + expires + ";";//save in cookie
-		var decodedCookie = decodeURIComponent(document.cookie); //decode from cookie
-		console.log("written to cookie"+decodedCookie);
-
-    	swal(
-		    "Successfully Login",
-		    "Create New Quotation with site_name",
-		    "success"
-		).then(function() {
-		    window.location = "Homepage.html";
-		});
-    }
-    else{
-    	
-    	swal("Invalid Username/Password", "Enter correct Creadentials", "error");
-
-    }
-  }
-
-		var a = {
-			'username': usrn,
-			'password': pass
-		}
-		console.log(xhr, a);
-		xhr.open('POST', 'http://localhost:8081/login', true);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.send(JSON.stringify(a));
-		console.log("send");
-		var res = (JSON.stringify(xhr.responseText));
-		console.log("responseText "+res);
-		console.log(xhr);
-
-
-	}
+            window.history.forward();
+            function noBack() { 
+                window.history.forward();
+                document.getElementById('username').focus();
+            }
 </script>
+</html>
