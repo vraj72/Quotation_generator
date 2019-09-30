@@ -17,7 +17,7 @@
 </head>
 
 <header class="nav_header">
-	<h1 id="nav_h1">App Name</h1>
+	<h1 id="nav_h1" style="padding-top: 10px; color: ">EasyQuotation Generator</h1>
 
 <nav class="nav_nav">
 	<a class="nav_a" href="Homepage.html" >Home</a>
@@ -30,7 +30,7 @@
 </header>
 
 	<body>
-		<div class="container-q2">
+		<div class="container-q2" id="reset">
 			<div style="height: 200px;"></div>
 			<div class="wrap-q2">
 
@@ -45,23 +45,23 @@
 						<br>
 						<div>
 							<h6 >Name:   </h6><br>
-							<input id="i_name_s" class="inputTitlef" type="text" placeholder="Name">
+							<input id="i_name_s" class="inputTitlef" type="text" placeholder="Name" required>
 						</div>
 						<br>
 						<div>
 							<h6 >Email:  </h6><br>
-							<input id="i_email_s" class="inputTitlef" type="text" placeholder="example@email.com">
+							<input id="i_email_s" class="inputTitlef" type="text" placeholder="example@email.com"  required>
 						</div>
 						<br>
 						<div>
 							<h6 >Address:</h6><br>
 							<!-- <input class="inputTitlef" type="text" placeholder="Street"> -->
-							<textarea id="i_address_s" class="inputTitlef" placeholder="Street" style="height: 150px; resize: none;" ></textarea>
+							<textarea id="i_address_s" class="inputTitlef" placeholder="Street" style="height: 150px; resize: none;"  required></textarea>
 						</div>
 						<br>
 						<div>
 							<h6 >Phone:  </h6><br>
-							<input id="i_phn_s" class="inputTitlef" type="text" placeholder="+xx 10 digits">
+							<input id="i_phn_s" class="inputTitlef" type="text" placeholder="+xx 10 digits"  required>
 						</div>
 						
 					</div>
@@ -131,9 +131,9 @@
 						<h5>1 .</h5>
 						<div id="Feild_0"  onkeyup="update_total(0);" onpaste="update_total(0);" oninput="update_total(0);"	 style="display:flex; flex-direction: row;">
 							<div style="width: 50%;">
-							<input class="inputTitlef" id="item" type="text" placeholder="Item" style="width: 100%;">
+							<input class="inputTitlef" id="item_n" type="text" placeholder="Item" style="width: 100%;">
 							<br>
-							<textarea class="inputTitlef" placeholder="Additional Description" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea>
+							<textarea class="inputTitlef" id="i_desc" placeholder="Additional Description" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea>
 							</div>
 						
 
@@ -175,7 +175,7 @@
 
 					<div style="padding-left: 10%;">
 						<h6>Notes</h6>
-						<textarea class="inputTitlef" placeholder="Notes - any relavent information not covered , additional items and codition" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea>
+						<textarea class="inputTitlef" id="notes_f" placeholder="Notes - any relavent information not covered , additional items and codition" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea>
 					</div>
 
 					
@@ -184,7 +184,7 @@
 
 			<div style="padding-left: 55%;">
 			<button style="height: 50px; width: 80px; background-color: #97e3ff; border-radius: 5px;" id='create_b' onclick="getValues()">Create</button>
-			<button style="height: 50px; width: 80px; background-color: #97e3ff; border-radius: 5px;">Delete</button>
+			<button style="height: 50px; width: 80px; background-color: #97e3ff; border-radius: 5px;" onclick="reset()">Delete</button>
 			</div>
 
 		</div>

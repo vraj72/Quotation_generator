@@ -2,7 +2,8 @@ var username = getCookie("username");
 // document.getElementById('Title_invoice').contentEditable='true';
 var create_b = document.getElementById("create_b");
 var json_data = {
-	username : username
+	username : username,
+	item_data : []
 }
 console.log("json "+JSON.stringify(json_data));
 
@@ -29,7 +30,7 @@ function addFeild_fun(){
 
 	var div_holding_feilds = document.getElementById('div_holding_feilds');
 
-	var addField='<br><h5>'+(feild_i+1)+' .</h5><div id="Feild_'+feild_i+'" onkeyup="update_total('+feild_i+');" onpaste="update_total('+feild_i+');" oninput="update_total('+feild_i+');" style="display:flex; flex-direction: row;"><div style="width: 50%;"><input class="inputTitlef" type="text" placeholder="Item" style="width: 100%;"><br><textarea class="inputTitlef" placeholder="Additional Description" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea></div><div style="width: 12%; padding-left:3%;"><input class="inputTitlef" id="rate" type="text" placeholder="0.00 " style="width: 100%;"></div><div style="width: 10%; padding-left:2%;"><input class="inputTitlef" id="quantity" type="text" placeholder="1" style="width: 100%;"></div><div id="amount_f" style="width: 15%; padding-left:6%;"><h5>0.00</h5></div><div style="width: 12%; padding-left:2%;"><input class="inputTitlef" id="tax" type="text" placeholder="13%" style="width: 100%;"></div></div>';
+	var addField='<br><h5>'+(feild_i+1)+' .</h5><div id="Feild_'+feild_i+'" onkeyup="update_total('+feild_i+');" onpaste="update_total('+feild_i+');" oninput="update_total('+feild_i+');" style="display:flex; flex-direction: row;"><div style="width: 50%;"><input class="inputTitlef" type="text" id="item_n" placeholder="Item" style="width: 100%;"><br><textarea class="inputTitlef"  id="i_desc" placeholder="Additional Description" style="height: 100px; resize: none; width: 90%; padding-top: 20px;" ></textarea></div><div style="width: 12%; padding-left:3%;"><input class="inputTitlef" id="rate" type="text" placeholder="0.00 " style="width: 100%;"></div><div style="width: 10%; padding-left:2%;"><input class="inputTitlef" id="quantity" type="text" placeholder="1" style="width: 100%;"></div><div id="amount_f" style="width: 15%; padding-left:6%;"><h5>0.00</h5></div><div style="width: 12%; padding-left:2%;"><input class="inputTitlef" id="tax" type="text" placeholder="13%" style="width: 100%;"></div></div>';
 	// div_holding_feilds.innerHTML +=addField;
 	// var text = $('#Feild_'+(feild_i-1)+' :input').text($("#item").value); //to get values of particular id feild
 	// console.log(text);
@@ -65,11 +66,13 @@ function getValues(){
 		if(t=validate_custom(id_list[i][0]))
 		{
 			json_data[id_list[i][1]] = t;
-			console.log("json "+JSON.stringify(json_data));
+			// console.log("json "+JSON.stringify(json_data));
 		}
 		else break;
 	}
-	update_total();
+			
+	console.log("json "+JSON.stringify(json_data));
+	feild_data();
 }
 
 function validate_custom(id){
@@ -138,7 +141,7 @@ function update_total(j)
 	amount += (amount/100)*(Number(div_feild.tax.value));
 	amount = amount.toFixed(2);
 	div_feild.amount_f.innerHTML =amount;
-	console.log(feildId , div_feild);
+	// console.log(feildId , div_feild);
 	update_final();
 	
 }
@@ -156,8 +159,52 @@ function update_final()
 		total=total+Number(div_feild.amount_f.innerHTML);
 
 	}
-	console.log(total,subtotal);
-	document.getElementById('sub').innerHTML='Subtotal : ₹  '+subtotal.toFixed(2);	
-	document.getElementById('tot').innerHTML='Total : ₹  '+total.toFixed(2);
-	document.getElementById('tax_f').innerHTML='Tax('+((total-subtotal)*100/(subtotal)).toFixed(2)+'%)  : ₹  '+(total-subtotal).toFixed(2);
+	// console.log(total,subtotal);
+	subtotal=subtotal.toFixed(2);
+	total=total.toFixed(2);
+	var tax_per =((total-subtotal)*100/(subtotal)).toFixed(2);
+	var tax_amount=(total-subtotal).toFixed(2);
+	document.getElementById('sub').innerHTML='Subtotal : ₹  '+subtotal;	
+	document.getElementById('tot').innerHTML='Total : ₹  '+total;
+	document.getElementById('tax_f').innerHTML='Tax('+tax_per+'%)  : ₹  '+tax_amount;
+
+	json_data['total_amount']=total;
+	json_data['subtotal_amount']=subtotal;
+	json_data['tax_per']=tax_per;
+	json_data['tax_amount']=tax_amount;
+}
+
+
+function feild_data()
+{
+	json_data.item_data = [];
+	for(j=0;j<feild_i;j++)
+	{
+		var feildId = "Feild_"+j;
+		var div_feild = document.getElementById(feildId).getElementsByTagName("*");
+		json_data.item_data.push({
+				"item" : div_feild.item_n.value,
+				"desc" : div_feild.i_desc.value,
+				"rate" : div_feild.rate.value,
+				"quan" : div_feild.quantity.value,
+				"tax" : div_feild.tax.value,
+				"amount" : div_feild.amount_f.innerHTML
+		});
+
+	}
+
+	
+	var note=document.getElementById('notes_f').value;
+	json_data['note']=note;
+
+	console.log(JSON.stringify(json_data));
+
+	// json_data[]
+
+
+}
+
+function reset()
+{
+	document.getElementById('reset').reset();
 }
