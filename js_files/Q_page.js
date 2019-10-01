@@ -1,10 +1,12 @@
 var username = getCookie("username");
+var xhr = new XMLHttpRequest();
 // document.getElementById('Title_invoice').contentEditable='true';
 var create_b = document.getElementById("create_b");
 var json_data = {
 	username : username,
 	item_data : []
 }
+var flag=0;
 console.log("json "+JSON.stringify(json_data));
 
 if (username == "") {
@@ -46,19 +48,19 @@ var id_list = [['i_name_s','name_s'],['i_email_s','email_s'],['i_address_s','add
 
 function getValues(){
 	var t;
-	var value=document.getElementById('Title_invoice').innerHTML;
-	if( value.length == 0)
-	{
-		Swal.fire({
-			  type: 'warning',
-			  title: 'Enter Title'
-			});
-		document.getElementById(id).focus();
-		return ;
-	}
-	else {
-		json_data['title'] = value;
-	}
+	// var value=document.getElementById('Title_invoice').innerHTML;
+	// if( value.length == 0)
+	// {
+	// 	Swal.fire({
+	// 		  type: 'warning',
+	// 		  title: 'Enter Title'
+	// 		});
+	// 	document.getElementById(id).focus();
+	// 	return ;
+	// }
+	// else {
+		json_data['title'] = 'Quotation';
+	// }
 
 
 	for(i=0;i<id_list.length;i++)
@@ -66,13 +68,16 @@ function getValues(){
 		if(t=validate_custom(id_list[i][0]))
 		{
 			json_data[id_list[i][1]] = t;
+			flag=1;
 			// console.log("json "+JSON.stringify(json_data));
 		}
-		else break;
+		else {flag=-1;break;}
 	}
 			
 	console.log("json "+JSON.stringify(json_data));
+	if(flag==1){
 	feild_data();
+	xhrSend();}
 }
 
 function validate_custom(id){
@@ -131,6 +136,84 @@ function Validatephone(phn)
 }
 
 
+
+
+function feild_data()
+{
+	json_data.item_data = [];
+	for(j=0;j<feild_i;j++)
+	{
+		var feildId = "Feild_"+j;
+		var div_feild = document.getElementById(feildId).getElementsByTagName("*");
+		json_data.item_data.push({
+				"item" : div_feild.item_n.value,
+				"desc" : div_feild.i_desc.value,
+				"rate" : div_feild.rate.value,
+				"quan" : div_feild.quantity.value,
+				"tax" : div_feild.tax.value,
+				"amount" : div_feild.amount_f.innerHTML
+		});
+
+	}
+
+	
+	var note=document.getElementById('notes_f').value;
+	json_data['note']=note;
+
+	console.log(JSON.stringify(json_data));
+
+	// Swal.fire({
+	// 		  type: 'success',
+	// 		  title:"Successfully Created Quotation" ,
+	// 		});
+
+	
+
+
+}
+
+function reset()
+{
+	document.getElementById('reset').reset();
+}
+
+function xhrSend(){
+		xhr.open('POST', 'http://localhost:8081/pdf', true);
+		xhr.setRequestHeader('Content-Type', 'application/json');
+		xhr.send(JSON.stringify(json_data));
+		console.log("send");
+
+
+		
+		console.log(xhr);
+
+}
+
+xhr.onload = function() {
+			console.log("in onload "+xhr);
+			var res = (xhr.responseText);
+			console.log("responseText "+res+xhr.responseText);
+
+			// Swal.fire(
+			//     "Successfully Created Quotation",
+			//     "Check your pdf",
+			//     "success"
+			// ); 
+			setTimeout(function(){window.location.href=res; }, 2000);
+
+		}
+
+
+
+
+
+
+
+
+
+
+		//dynamic feilds updattion
+
 function update_total(j)
 {
 	
@@ -172,39 +255,4 @@ function update_final()
 	json_data['subtotal_amount']=subtotal;
 	json_data['tax_per']=tax_per;
 	json_data['tax_amount']=tax_amount;
-}
-
-
-function feild_data()
-{
-	json_data.item_data = [];
-	for(j=0;j<feild_i;j++)
-	{
-		var feildId = "Feild_"+j;
-		var div_feild = document.getElementById(feildId).getElementsByTagName("*");
-		json_data.item_data.push({
-				"item" : div_feild.item_n.value,
-				"desc" : div_feild.i_desc.value,
-				"rate" : div_feild.rate.value,
-				"quan" : div_feild.quantity.value,
-				"tax" : div_feild.tax.value,
-				"amount" : div_feild.amount_f.innerHTML
-		});
-
-	}
-
-	
-	var note=document.getElementById('notes_f').value;
-	json_data['note']=note;
-
-	console.log(JSON.stringify(json_data));
-
-	// json_data[]
-
-
-}
-
-function reset()
-{
-	document.getElementById('reset').reset();
 }
