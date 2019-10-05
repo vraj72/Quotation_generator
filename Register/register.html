@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+</head>
+<link href="register.css" rel="stylesheet">
+
+<body>
+
+  <form name="regForm" id="regForm">
+    <div id="login-box">
+      <div class="left-box">
+    <h1>Register:</h1>
+    <!-- One "tab" for each step in the form: -->
+    <div class="tab"><b>Personal details:</b>
+      <p><input type="text" placeholder="First name..." id="Pname1"></p>
+      <p><input type="text"placeholder="Last name..."  id="Pname2"></p>
+      <p><input type="email" placeholder="E-mail..." id="Pemail"></p>
+      <p><input type="tel" maxlength="10" placeholder="Mobile number..." id="Pphone"></p>
+      <p><input type="text" placeholder="Address..." id="Paddress"></p>
+      <p><input type="text" placeholder="Your role..." id="Prole"></p>
+    </div>
+
+    <div class="tab"><b>Organisation details:</b>
+      <p><input type="text" placeholder="Username..."  id="Oname"></p>
+      <p><input type="email" placeholder="E-mail..."  id="Oemail"></p>
+      <p><input type="tel" maxlength="10" placeholder="Phone number..."  id="Ophone"></p>
+      <p><input type="text" placeholder="Address1..." id="Oaddress1"></p>
+      <p><input type="text" placeholder="Address2..." id="Oaddress2"></p>
+      <p><input type="number" placeholder="Fax number..." id="Ofax"></p>
+      <p><input type="number" placeholder="Registeration number..." id="Oreg"></p>
+      <!-- <p><input type="file" placeholder="Logo..." id="Oimage"></p> -->
+    </div>
+
+    <div class="tab"><b>Account details:</b>
+      <p><input type="text" placeholder="Username..." id="Aname"></p>
+      <p><input type="password" placeholder="Password..." id="Apassword"></p>
+      <p><input type="password" placeholder="Re-enter password" id="Apassword2"></p>
+    </div>
+    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+    <button type="button" id="nextBtn" onclick="allfunctions()">Next</button>
+  </div>
+  <div class="right-box">
+
+  </div>
+</div>
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:0%">
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+    </div>
+  </form>
+
+  <script type="text/javascript">
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+  showTab(currentTab); // Display the current tab
+
+  function showTab(n) {
+    // This function will display the specified tab of the form...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    //... and fix the Previous/Next buttons:
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = "none";
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
+    }
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").innerHTML = "Submit";
+    } else {
+      document.getElementById("nextBtn").innerHTML = "Next";
+    }
+    //... and run a function that will display the correct step indicator:
+    fixStepIndicator(n)
+  }
+
+  function nextPrev(n) {
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form...
+    if (currentTab >= x.length) {
+      // ... the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+  }
+
+  function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+      // If a field is empty...
+      if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        y[i].className += " invalid";
+        // and set the current valid status to false
+        valid = false;
+      }
+    }
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid; // return the valid status
+  }
+
+  function fixStepIndicator(n) {
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class on the current step:
+    x[n].className += " active";
+  }
+
+  function allfunctions()
+  {
+    nextPrev(1);
+    xhrPass();
+    validateFirst();
+    //validateSecondpage();
+    //validateThirdpage();
+  }
+
+      var xhr = new XMLHttpRequest();
+  		// xhr.onload = function() {
+      // if (xhr.status === 200) {
+      //   swal("Successfully Login", "Create New Quotation with site_name", "success");
+      //   }
+      // }
+      var Pname1 = document.getElementById('Pname1').value;
+      var Pname2 = document.getElementById('Pname2').value;
+      var Pemail = document.getElementById('Pemail').value;
+      var atposition=Pemail.indexOf("@");
+      var dotposition=Pemail.lastIndexOf(".");
+      var Pphone = document.getElementById('Pphone').value;
+      var Paddress = document.getElementById('Paddress').value;
+      var Prole = document.getElementById('Prole').value;
+  		var a = {
+  			'Pname1' : Pname1,
+        'Pname2' : Pname2,
+        'Pemail' : Pemail,
+        'Pphone' : Pphone,
+        'Paddress' : Paddress,
+        'Prole' : Prole
+  		};
+
+      function validateFirst()
+      {
+        if (Pname1.length == 0 || Pname2.length == 0 || Pemail.length == 0 || Pphone.length == 0 || Paddress.length == 0 || Prole.length == 0)
+        {
+            alert("Please fill all details");
+            return false;
+        }
+        if (Pphone.length<=9 && Pphone.length!=0)
+        {
+            alert("Invalid Mobile number");
+            return false;
+        }
+        if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length)
+        {
+          alert("Please enter a valid e-mail address");
+          return false;
+        }
+        else
+        {
+           return true;
+        }
+      }
+
+      var Oname=document.getElementById("Oname").value;
+      var Oemail=document.getElementById("Oemail").value;
+      var Ophone=document.getElementById("Ophone").value;
+      var Oaddress1=document.getElementById("Oaddress1").value;
+      var Oaddress2=document.getElementById("Oaddress2").value;
+      var Ofax=document.getElementById("Ofax").value;
+      var Oreg=document.getElementById("Oreg").value;
+
+      var b={
+        'Oname':Oname,
+        'Oemail':Oemail,
+        'Ophone':Ophone,
+        'Oaddress1':Oaddress1,
+        'Oaddress2':Oaddress2,
+        'Ofax':Ofax,
+        'Oreg':Oreg
+      };
+
+      function validateSecondpage()
+      {
+          if (Oname.length==0 || Oemail.length==0 || Ophone.length==0 || Oaddress1.length==0 || Oaddress2.length==0 || Ofax.length==0 || Oreg.length==0)
+          {
+              alert("Please fill all details");
+              return false;
+          }
+          if(Oreg<0)
+          {
+            alert("Invalid Registeration number");
+            return false;
+          }
+          if(Ofax<0)
+          {
+            alert("Invalid fax number");
+            return false;
+          }
+          else
+          {
+            return true;
+          }
+      }
+
+      var Aname=document.getElementById("Aname").value;
+      var Apassword=document.getElementById("Apassword").value;
+      var Apassword2=document.getElementById("Apassword2").value;
+
+      var c={
+        'Aname':Aname,
+        'Apassword':Apassword,
+        'Apassword2':Apassword2
+      }
+      function validateThirdpage()
+      {
+        if (Aname.length==0 || Apassword.length==0 || Apassword2.length==0)
+        {
+            alert("Please fill all details");
+            return false;
+        }
+        if(Apassword.length<8)
+        {
+          alert("Short password minimum length must be 8 characters");
+          return false;
+        }
+        if(Apassword != Apassword2)
+        {
+          alert("Password mismatch");
+          return false;
+        }
+        else
+        {
+            return true;
+        }
+      }
+
+      function xhrPass()
+      {
+  		xhr.open('POST', 'http://localhost:8080/register', true);
+  		xhr.setRequestHeader('Content-Type', 'application/json');
+      console.log(a);
+      console.log(b);
+      console.log(c);
+  		xhr.send(JSON.stringify(a));
+      xhr.send(JSON.stringify(b));
+      xhr.send(JSON.stringify(c));
+  		var res = (JSON.stringify(xhr.responseText));
+      }
+  </script>
+</body>
+</html>

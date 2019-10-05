@@ -1,0 +1,186 @@
+* {
+  box-sizing: border-box;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 300;
+    background-image: linear-gradient(to top, #a30505, #cc0033, #ec006a, #f900af, #e900ff);
+}
+
+
+/* #regForm {
+  background-color: #ffffff;
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+} */
+
+/* input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+} */
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+/* button {
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+} */
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+}
+
+/* #prevBtn {
+  background-color: #bbbbbb;
+} */
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}
+
+
+#login-box
+{
+    position: relative;
+    margin: 3.1% auto;
+    height: 650px;
+    width: 900px;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.left-box
+{
+    position: absolute;
+    box-sizing: border-box;
+    padding: 45px;
+    width: 450px;
+    height: 650px;
+}
+
+h1
+{
+    margin: 20px 0 40px 60px;
+    font-weight: 400;
+    font-size: 35px;
+    color:grey;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="number"],
+input[type="file"],
+input[type="password"],
+input[type="tel"]
+{
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 4px;
+    width: 300px;
+    height: 35px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #aaa;
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    transition: 0.2s ease;
+}
+
+button[type="button"]
+{
+  margin-bottom: 28px;
+  width: 120px;
+  height: 32px;
+  background: #f44336;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+/* .abc
+{
+    margin-left: 46%;
+    margin-top:0%;
+    width: 120px;
+    height: 32px;
+    float:left;
+    background: black;
+    border: none;
+    border-radius: 2px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    transition: 0.2s ease;
+    cursor: pointer;
+} */
+
+input[type="button"]:hover,
+input[type="button"]:focus
+{
+    background: #ff5722;
+    transition: 0.2s ease;
+}
+
+.right-box
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 450px;
+    height: 650px;
+    background-image: url(image3.jpg);
+    background-size: cover;
+    background-position: center;
+}
