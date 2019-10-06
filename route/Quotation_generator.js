@@ -138,39 +138,30 @@ router.post('/pdf',(req,res)=>{
    					.fillColor('black')
    					.text('Total Amount : '+total_amount,360,doc.y);
 
+   				doc.moveDown();
 
-				// console.log("item data "+item_data[j].item);
+   				doc.fontSize(12)
+   					.text('Notes: ',60,doc.y);
 
+   				doc.moveDown();
 
+   				doc.fontSize(10)
+   					.text(note,70,doc.y);
 
+   				doc.moveDown();
+   				doc.moveDown();
+   				doc.moveTo(20,doc.y)
+   					.lineTo(590,doc.y)
+   					.stroke();
+   				doc.moveDown();
+
+   				doc.fontSize(13)
+   					.text("Signature: ______________",360,doc.y);
+   				doc.moveDown();
+   				doc.fontSize(13)
+   					.text("Date: ______________",360,doc.y);
 
    				doc.end();
-
-
-
-				// for(var j=0;j<item_data.length;j++)
-				// console.log("item data "+item_data[j].item);
-    			
-
-
-				// collection.find({'id' : usrn}).toArray(function(err,docs) {
-				// 	//console.log("inside "+docs.length);
-				// 	if(docs.length == 0){
-				// 		console.log("error in logging");
-				// 		res.sendStatus(404);
-				// 	}
-					
-				// 	else{
-				// 		assert.equal(err,null);
-				// 		//console.log("password "+docs[0].pass);
-				// 		if(typeof docs[0].pass !== 'undefined' && docs[0].pass==password){
-				// 		 		res.sendStatus(200); 
-				// 		 		// res.send("Successfully Login");
-				// 		 	} 
-				// 		else  res.sendStatus(404);
-				// 		// res.send("Invalid Username or Password");
-				// 	}
-				// });
 				
 				if(usrn.length>0)
 				{res.send('file:///home/viraj/Desktop/IP/Quotation_Genearator/quotationPDFs/q'+usrn+'.pdf');

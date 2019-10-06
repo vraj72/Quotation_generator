@@ -14,9 +14,11 @@ app.use(function(req, res, next) {
 var login = require('./login');
 var profile=require('./profile');
 var pdf=require('./Quotation_generator');
+var register=require('./register');
  
 app.use('',login);  //login file from post_login
 app.use('',profile);
 app.use('',pdf);
+app.use('',register);
 
 module.exports=app;

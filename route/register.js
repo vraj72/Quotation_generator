@@ -1,48 +1,51 @@
 var express = require('express');
-var app = express.Router();
-const assert = require('assert');
-var bodyparser = require("body-parser");
-var fs = require('fs');
-var app = express();
-app.use(express.json())
-var collection;
-var db;
-
-app.get('/', function(req, res){
-  res.sendFile(__dirname + '/11.html');
-  res.sendFile(__dirname + '/11.css');
-  app.use('/css',express.static(__dirname + '/css'));
-  fs.readFile('11.css', function(req, res){
-  });
-  fs.readFile('11.html', function(req, res) {
-  });
-});
-app.listen(8080);
-console.log('listening on port 8080');
-
-//connection url
-const url = 'mongodb://localhost:27017';
+var router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const assert = require('assert');
+var collection;
 
-//Database name
-const dbname = 'quotation';
+	
+MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, function(err, client) {
+	assert.equal(null, err);
+  	console.log("Connected successfully to server *regiter");
+  	const db = client.db("quotation");
+  	collection =db.collection('account');
 
-//connect to server
-MongoClient.connect(url,{ useNewUrlParser:true, useUnifiedTopology: true}, function(err, client){
-  assert.equal(null, err);
-  console.log('Connected to server');
-  db = client.db(dbname);
-  collection =db.collection('register');
-
+  	
+  client.close();
+  console.log("Mongo Client Closed");
 });
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
-app.post('/register',(req,res)=>{
+// router.post('/profile',(req,res)=>{
+
+// 				console.log("profile called ");
+// 				var usrn= req.body.username;
+//     			// var password = req.body.password;
+//     			console.log("id "+usrn);
+
+
+// 				collection.find({'id' : usrn}, { projection: { _id: 0 , which_fields_u_dont_want_make_theme :0} }).toArray(function(err,docs) {
+// 					//console.log("inside "+docs.length);
+// 					if(docs.length == 0){
+// 						console.log("Profile Not found");
+// 						res.sendStatus(404);
+// 					}
+					
+// 					else{
+// 						assert.equal(err,null);
+// 						console.log("password "+docs[0].pass);
+					
+// 								console.log(docs[0]);
+// 								res.send(docs[0]);
+// 					}
+// 				});
+// 			});
+
+
+
+router.post('/register',(req,res)=>{
 
           console.log("register called");
 				  var Pname1= req.body.Pname1;
@@ -79,14 +82,6 @@ app.post('/register',(req,res)=>{
             console.log("Account details inserted");
           });
 });
-				  // collection.insert({'usrn' : usrn}, { projection: { _id: 0 } }).toArray(function(err,docs) {
-					// console.log("inside "+docs.length);
-					//  if(docs.length == 0)
-          //  {
-					//  	console.log("Error bhai");
-					//  	res.sendStatus(404);
-					//  }
-          // else
-          // {
-          //   console.log("1 document inserted");
-          // }
+
+module.exports= router;
+	

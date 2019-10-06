@@ -180,7 +180,7 @@ input[type="button"]:focus
     padding: 40px;
     width: 450px;
     height: 650px;
-    background-image: url(image3.jpg);
+   
     background-size: cover;
     background-position: center;
 }
