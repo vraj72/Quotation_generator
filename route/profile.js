@@ -12,7 +12,7 @@ MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, fun
   	const db = client.db("quotation");
   	collection =db.collection('account');
 
-  	
+
   client.close();
   console.log("Mongo Client Closed");
 });
@@ -48,7 +48,7 @@ const multer = require('multer');
 // const ejs = require('ejs');
 const path = require('path');
 const storage = multer.diskStorage({
-    destination: './public/uploads',
+    destination: './images',
     filename: function (req, file, cb) {
         // null as first argument means no error
         console.log(file);
@@ -109,22 +109,6 @@ function sanitizeFile(file, cb) {
     }
 }
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-            // $('#imagePreview').hide();
-            // $('#imagePreview').fadeIn(650);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-$("#imageUpload").change(function() {
-    readURL(this);
-});
-
 
 
 module.exports= router;
-	
