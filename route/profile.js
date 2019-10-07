@@ -21,27 +21,110 @@ MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, fun
 router.post('/profile',(req,res)=>{
 
 				console.log("profile called ");
-				var usrn= req.body.username;
+				var usrnn= req.body.name;
     			// var password = req.body.password;
-    			console.log("id "+usrn);
+    			console.log("id "+usrnn);
 
 
-				collection.find({'id' : usrn}, { projection: { _id: 0 , which_fields_u_dont_want_make_theme :0} }).toArray(function(err,docs) {
+
+				collection.find({'Pfirstname' : usrnn}, { projection: { _id: 0 } }).toArray(function(err,docs) {
 					//console.log("inside "+docs.length);
 					if(docs.length == 0){
 						console.log("Profile Not found");
 						res.sendStatus(404);
 					}
-					
+
 					else{
 						assert.equal(err,null);
-						console.log("password "+docs[0].pass);
-					
+						// console.log("password "+docs[0].pass);
+
 								console.log(docs[0]);
 								res.send(docs[0]);
 					}
 				});
 			});
+
+const multer = require('multer');
+// const ejs = require('ejs');
+const path = require('path');
+const storage = multer.diskStorage({
+    destination: './public/uploads',
+    filename: function (req, file, cb) {
+        // null as first argument means no error
+        console.log(file);
+        cb(null, Date.now() + '-' + file.originalname )
+    }
+})
+
+// Init upload
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1000000
+    },
+
+    fileFilter: function (req, file, cb) {
+        sanitizeFile(file, cb);
+    }
+
+}).single('pic')
+
+router.post('/upload', (req, res) => {
+    res.send('done');
+    upload(req, res, (err) => {
+        if (err){
+          console.log("hii");
+            // res.render('index', { msg: err})
+        }else{
+            // If file is not selected
+            if (req.file == undefined) {
+                // res.render('index', { msg: 'No file selected!' })
+                console.log("hey");
+            }
+            else{
+                // res.render('index', { msg: 'File uploaded successfully!' })
+                // console.log(file);
+            }
+
+        }
+
+    })
+})
+
+function sanitizeFile(file, cb) {
+    // Define the allowed
+    let fileExts = ['png', 'jpg', 'jpeg', 'gif']
+
+    // Check allowed extensions
+    let isAllowedExt = fileExts.includes(file.originalname.split('.')[1].toLowerCase());
+    // Mime type must be an image
+    let isAllowedMimeType = file.mimetype.startsWith("image/")
+
+    if (isAllowedExt && isAllowedMimeType) {
+        return cb(null, true) // no errors
+    }
+    else {
+        // pass error msg to callback, which can be displaye in frontend
+        cb('Error: File type not allowed!')
+    }
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            // $('#imagePreview').hide();
+            // $('#imagePreview').fadeIn(650);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+$("#imageUpload").change(function() {
+    readURL(this);
+});
+
+
 
 module.exports= router;
 	

@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>hhhh</title>
+  </head>
+  <body>
+
+    <head>
+      <meta charset="UTF-8">
+      <title>Image Upload with preview</title>
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    </head>
+    <body>
+      <form action="http://localhost:3012/upload" method="post" enctype="multipart/form-data">
+<!-- <form method="POST" action="/upload" enctype="multipart/form-data"> -->
+
+  <input type="submit">
+  <div class="avatar-upload">
+      <div class="avatar-edit">
+          <input type='file' id="imageUpload" name="pic" />
+          <label for="imageUpload"></label>
+      </div>
+      <div class="avatar-preview">
+          <div id="imagePreview" style="background-image: none;">
+          </div>
+      </div>
+  </div>
+<!-- partial -->
+<script src= 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+<script  src="./script.js"></script>
+
+</form>
+
+    <!-- partial:index.partial.html -->
+    <div class="container">
+<p id="n14">Welcome  </p>
+
+
+<div class="c1">
+<h1>Personal details:</h1><br>
+<p id="n1" >FirstName:</p><br>
+<p id="n2">LastName:</p><br>
+<p id="n3">Email:</p><br>
+<p id="n4">Mobile Number:</p><br>
+<p id="n5">Address:</p><br>
+<p id="n6">Your Role:</p><br>
+</div>
+<div class="c2">
+<h1>Organizational details:</h1><br>
+<p id="n8">Username:</p><br>
+<p id="n7">Email:</p><br>
+<p id="n9">PhoneNumber:</p><br>
+<p id="n10">Address:</p><br>
+<p id="n11">FaxNumber:</p><br>
+<p id="n12">Registration Number:</p><br>
+</div>
+<div class="c3">
+  <h1>Account details:</h1><br>
+  <p id="n13">Username:</p><br>
+</div>
+
+
+  </body>
+</html>
+<script type="text/javascript">
+  var usrn="sourav";
+  //var cookies = document.cookies
+  console.log(usrn);
+
+  var xhr = new XMLHttpRequest();
+
+  	console.log("hello");
+  var a = {
+    name : usrn
+  }
+ var cors_api_url = 'https://cors-anywhere.herokuapp.com/';
+  console.log(xhr,a);
+  xhr.open("POST",'http:127.0.0.1:3012/upload', true);
+  xhr.setRequestHeader("Content-Type","application/json");
+  xhr.onload = function (){
+    // var hi=document.write(this.responseText)
+    // 0this.responseText;
+    // document.getElementById('n1').write(this.responseText)
+    var myObj, x;
+    console.log("response "+this.responseText);
+    myObj = this.responseText;
+    myObj=JSON.parse(myObj);
+    var x = myObj.Pfirstname;
+    var y = myObj.Plastname;
+    var z = myObj.Pemail;
+    var v = myObj.Pphone;
+    var s = myObj.Paddress;
+    var t = myObj.Prole;
+    var h = myObj.Ousername;
+    var j = myObj.Oemail;
+    var k = myObj.Ophone;
+    var l = myObj.Oaddress;
+    var m = myObj.Ofaxnumber;
+    var o = myObj.Oregistrationno;
+    var p = myObj.Ausername;
+    document.getElementById("n1").innerHTML += x;
+    document.getElementById("n2").innerHTML += y;
+    document.getElementById("n3").innerHTML += z;
+    document.getElementById("n4").innerHTML += v;
+    document.getElementById("n5").innerHTML += s;
+    document.getElementById("n6").innerHTML += t;
+    document.getElementById("n7").innerHTML += h;
+    document.getElementById("n8").innerHTML += j;
+    document.getElementById("n9").innerHTML += k;
+    document.getElementById("n10").innerHTML += l;
+    document.getElementById("n11").innerHTML += m
+    document.getElementById("n12").innerHTML += o;
+    document.getElementById("n13").innerHTML += p;
+    document.getElementById("n14").innerHTML +=x;
+
+
+  }
+
+  xhr.send(JSON.stringify(a));
+
+</script>
