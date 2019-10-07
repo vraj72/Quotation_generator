@@ -4,12 +4,13 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 const assert = require('assert');
 var collection;
+const db;
 
 	
 MongoClient.connect(url,{ useNewUrlParser: true ,useUnifiedTopology: true }, function(err, client) {
 	assert.equal(null, err);
   	console.log("Connected successfully to server *regiter");
-  	const db = client.db("quotation");
+  	db = client.db("quotation");
   	collection =db.collection('account');
 
   	

@@ -4,8 +4,25 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
+  <link href="css/register.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
 </head>
-<link href="css/register.css" rel="stylesheet">
+
+
+
+<header class="nav_header">
+  <h1 id="nav_h1">App Name</h1>
+<nav class="nav_nav">
+  <a class="nav_a" href="Homepage.html" >Home</a>
+  <a class="nav_a" href="QPage.html">QuotationGenerator</a>
+  <a class="nav_a" href="">Samples</a>
+<span class="nav_span" >
+  <a class="nav_a_active" href="login_page.html">LogIn</a>
+  <a class="nav_a" href="">Register</a>
+</span>
+</nav>
+</header>
 
 <body>
 
@@ -131,10 +148,11 @@
   function allfunctions()
   {
     nextPrev(1);
-    xhrPass();
+    
     validateFirst();
-    //validateSecondpage();
-    //validateThirdpage();
+    validateSecondpage();
+    validateThirdpage();
+    xhrPass();
   }
 
       var xhr = new XMLHttpRequest();
@@ -143,22 +161,7 @@
       //   swal("Successfully Login", "Create New Quotation with site_name", "success");
       //   }
       // }
-      var Pname1 = document.getElementById('Pname1').value;
-      var Pname2 = document.getElementById('Pname2').value;
-      var Pemail = document.getElementById('Pemail').value;
-      var atposition=Pemail.indexOf("@");
-      var dotposition=Pemail.lastIndexOf(".");
-      var Pphone = document.getElementById('Pphone').value;
-      var Paddress = document.getElementById('Paddress').value;
-      var Prole = document.getElementById('Prole').value;
-  		var a = {
-  			'Pname1' : Pname1,
-        'Pname2' : Pname2,
-        'Pemail' : Pemail,
-        'Pphone' : Pphone,
-        'Paddress' : Paddress,
-        'Prole' : Prole
-  		};
+      
 
       function validateFirst()
       {
@@ -179,27 +182,29 @@
         }
         else
         {
+
+          var Pname1 = document.getElementById('Pname1').value;
+      var Pname2 = document.getElementById('Pname2').value;
+      var Pemail = document.getElementById('Pemail').value;
+      var atposition=Pemail.indexOf("@");
+      var dotposition=Pemail.lastIndexOf(".");
+      var Pphone = document.getElementById('Pphone').value;
+      var Paddress = document.getElementById('Paddress').value;
+      var Prole = document.getElementById('Prole').value;
+      var a = {
+        'Pname1' : Pname1,
+        'Pname2' : Pname2,
+        'Pemail' : Pemail,
+        'Pphone' : Pphone,
+        'Paddress' : Paddress,
+        'Prole' : Prole
+      };
+          
            return true;
         }
       }
 
-      var Oname=document.getElementById("Oname").value;
-      var Oemail=document.getElementById("Oemail").value;
-      var Ophone=document.getElementById("Ophone").value;
-      var Oaddress1=document.getElementById("Oaddress1").value;
-      var Oaddress2=document.getElementById("Oaddress2").value;
-      var Ofax=document.getElementById("Ofax").value;
-      var Oreg=document.getElementById("Oreg").value;
-
-      var b={
-        'Oname':Oname,
-        'Oemail':Oemail,
-        'Ophone':Ophone,
-        'Oaddress1':Oaddress1,
-        'Oaddress2':Oaddress2,
-        'Ofax':Ofax,
-        'Oreg':Oreg
-      };
+      
 
       function validateSecondpage()
       {
@@ -220,19 +225,29 @@
           }
           else
           {
+            var Oname=document.getElementById("Oname").value;
+      var Oemail=document.getElementById("Oemail").value;
+      var Ophone=document.getElementById("Ophone").value;
+      var Oaddress1=document.getElementById("Oaddress1").value;
+      var Oaddress2=document.getElementById("Oaddress2").value;
+      var Ofax=document.getElementById("Ofax").value;
+      var Oreg=document.getElementById("Oreg").value;
+
+      var b={
+        'Oname':Oname,
+        'Oemail':Oemail,
+        'Ophone':Ophone,
+        'Oaddress1':Oaddress1,
+        'Oaddress2':Oaddress2,
+        'Ofax':Ofax,
+        'Oreg':Oreg
+      };
             return true;
           }
+          
       }
 
-      var Aname=document.getElementById("Aname").value;
-      var Apassword=document.getElementById("Apassword").value;
-      var Apassword2=document.getElementById("Apassword2").value;
-
-      var c={
-        'Aname':Aname,
-        'Apassword':Apassword,
-        'Apassword2':Apassword2
-      }
+      
       function validateThirdpage()
       {
         if (Aname.length==0 || Apassword.length==0 || Apassword2.length==0)
@@ -252,22 +267,36 @@
         }
         else
         {
+          var Aname=document.getElementById("Aname").value;
+      var Apassword=document.getElementById("Apassword").value;
+      var Apassword2=document.getElementById("Apassword2").value;
+
+      var c={
+        'Aname':Aname,
+        'Apassword':Apassword,
+        'Apassword2':Apassword2
+      }
             return true;
         }
       }
 
       function xhrPass()
       {
-  		xhr.open('POST', 'http://localhost:8080/register', true);
+  		xhr.open('POST', 'http://localhost:8081/register', true);
   		xhr.setRequestHeader('Content-Type', 'application/json');
       console.log(a);
       console.log(b);
       console.log(c);
-  		xhr.send(JSON.stringify(a));
-      xhr.send(JSON.stringify(b));
-      xhr.send(JSON.stringify(c));
+  		xhr.send(JSON.stringify(a+b+c));
+      // xhr.send(JSON.stringify(b));
+      // xhr.send(JSON.stringify(c));
   		var res = (JSON.stringify(xhr.responseText));
       }
+
+
   </script>
+  <script  src="js_files/jquery.js"></script>
+
+  <script  src="js_files/sticky_nav.js"></script>
 </body>
 </html>

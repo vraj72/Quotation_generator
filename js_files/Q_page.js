@@ -12,13 +12,13 @@ console.log("json "+JSON.stringify(json_data));
 if (username == "") {
 	document.getElementById('login_a').innerHTML ="Log IN";
 	var span_login = document.getElementById('span_login');
-	var reg_span='<a class="nav_a" href="">Register</a>';
+	var reg_span='<a class="nav_a" href="register.html">Register</a>';
 	span_login.innerHTML += reg_span;
 } 
 else {
   	document.getElementById('login_a').innerHTML ="Log OUT";
   	var span_login = document.getElementById('span_login');
-	var reg_span='<a class="nav_a" href="">Profile</a>';
+	var reg_span='<a class="nav_a" href="profile.html">Profile</a>';
 	span_login.innerHTML += reg_span;
 }
 
